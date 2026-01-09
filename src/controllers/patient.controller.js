@@ -16,6 +16,7 @@ export const createPatient = async ( req, res ) => {
 
         if ( emailExists ) return res.status(409).json({ error: "El email ya está registrado" });
 
+        if ( patient.phone.length < 10 || patient.phone.length > 15 ) return res.status(400).json({ error: "El número de teléfono es inválido" });
 
         const newPatient = await patientsServices.create( patient );
 

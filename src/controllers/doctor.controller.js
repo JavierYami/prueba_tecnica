@@ -14,6 +14,7 @@ export const createDoctor = async ( req, res ) => {
         const emailExists = await DoctorServices.verifyEmail( doctor.email );
         if ( emailExists ) return res.status(409).json({ error: "El email ya está registrado" });
 
+        if ( doctor.phone.length < 10 || doctor.phone.length > 15 ) return res.status(400).json({ error: "El número de teléfono es inválido" });
 
         const newDoctor = await DoctorServices.create( doctor );
         return res.status(201).json({ newDoctor });
