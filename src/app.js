@@ -5,6 +5,8 @@ import { Doctor } from "./models/Doctor.js";
 import { Patient } from "./models/Patient.js";
 import { Appointment } from "./models/Appointment.js";
 import { applyAssociations } from "./models/associations.js";
+import { patientsRouter } from './routers/patient.router.js';
+import { doctorRouter } from './routers/doctor.router.js';
 
 dotenv.config();
 
@@ -13,6 +15,10 @@ const PORT = process.env.PORT ?? 3000;
 const app = express();
 
 app.use(json());
+
+app.use('/patients', patientsRouter);
+
+app.use('/doctors', doctorRouter);
 
 try {
   await sequelize.authenticate();
