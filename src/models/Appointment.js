@@ -6,28 +6,28 @@ export const Appointment = sequelize.define("Appointment", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
     },
-    doctor: {
+    doctorId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
-    patient: {
+    patientId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
-    Appointment: {
+    startTime: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
-    Appointment: {
+    endTime: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
-    active: {
-        type: DataTypes.BOOLEAN,
+    status: {
+        type: DataTypes.ENUM('ACTIVE', 'CANCELLED'),
         allowNull: false,
-        defaultValue: 1,
+        defaultValue: 'ACTIVE'
     }
 
 });

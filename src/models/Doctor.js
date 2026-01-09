@@ -8,23 +8,24 @@ export const Doctor = sequelize.define("Doctor", {
         primaryKey: true,
         autoIncrement: true
     },
-    first_name: {
+    firstName: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    last_name: {
+    lastName: {
         type: DataTypes.STRING,
         allowNull: false
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
-    
+
 });
 
 

@@ -1,6 +1,10 @@
 import express, {json} from 'express';
 import dotenv from 'dotenv';
 import { sequelize } from "./config/db.js";
+import { Doctor } from "./models/Doctor.js";
+import { Patient } from "./models/Patient.js";
+import { Appointment } from "./models/Appointment.js";
+import { applyAssociations } from "./models/associations.js";
 
 dotenv.config();
 
@@ -13,6 +17,7 @@ app.use(json());
 try {
   await sequelize.authenticate();
   console.log("DB conectada");
+  applyAssociations();
   await sequelize.sync({force: true});
   console.log("Modelos sincronizados"); 
 } catch (err) {
