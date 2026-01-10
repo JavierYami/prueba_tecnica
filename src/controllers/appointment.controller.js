@@ -54,6 +54,9 @@ export const cancelAppointment = async ( req, res ) => {
         if ( !appointmentId ) return res.status(400).json({ error: "El ID de la cita es requerido" });
         
         const cancelledAppointment = await appointmentServices.cancel( appointmentId );
+
+        if ( !cancelledAppointment ) return res.status(404).json({ error: "Cita no encontrada" });
+        
         return res.status(200).json({ cancelledAppointment });
     } catch (error) {
         return res.status(500).json({ error: error.message });

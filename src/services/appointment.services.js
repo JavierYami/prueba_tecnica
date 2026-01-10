@@ -47,7 +47,7 @@ class AppointmentServices {
             await appointment.save();
             return appointment;
         }  
-        throw new Error('No se encontró la cita');
+        return null;
     }
 
     async getEndTime( startTime ) {
