@@ -13,11 +13,33 @@ class AppointmentServices {
         if ( !patient ) throw new Error('No se encontró el paciente');
         return await Appointment.create(appointment);
     }
-    async findAll() {
+
+    async findAll( doctorId, from, to ) {
+        const where = { status: 'ACTIVE' };
+        if ( doctorId ) where.doctorId = doctorId;
+        if ( from && !to ) {
+            where.endTime = {
+                [Op.gte]: from
+            };
+        }
+        if ( to && !from ) {
+            where.startTime = {
+                [Op.lte]: to
+            };
+        }
+        if ( from && to ) {
+            where.startTime = {
+                [Op.lte]: to
+            };
+            where.endTime = {
+                [Op.gte]: from
+            };
+        }
         return await Appointment.findAll({
-            where: { status: 'ACTIVE' }
+            where: where
         });
     }
+    
     async cancel( appointmentId ) {
         const appointment = await Appointment.findByPk( appointmentId );
         if ( appointment ) {

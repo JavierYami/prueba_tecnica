@@ -27,8 +27,21 @@ export const createAppointment = async ( req, res ) => {
 }
 
 export const getAllAppointments = async ( req, res ) => {
+    const { doctorId, from, to} = req.query;
+
     try {
-        const appointments = await appointmentServices.findAll();
+
+        const fromDate = from ? new Date(from) : null;
+
+        const toDate = to ? new Date(to) : null;
+        
+        if ( from && isNaN( fromDate.getTime() ) ) return res.status(400).json({ error: "la fecha inicial del rango no es valida" });
+
+        if ( to && isNaN( toDate.getTime() ) ) return res.status(400).json({ error: "la fecha final del rango no es valida" });
+
+        if ( fromDate && toDate && fromDate > toDate ) return res.status(400).json({ error: "la fecha inicial del rango no puede ser mayor que la fecha final" });
+
+        const appointments = await appointmentServices.findAll( doctorId, fromDate, toDate );
         return res.status(200).json({ appointments });
     } catch (error) {
         return res.status(500).json({ error: error.message });
