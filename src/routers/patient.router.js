@@ -5,6 +5,3 @@ export const patientsRouter = Router();
 
 patientsRouter.post('/', createPatient);
 
-patientsRouter.get('/', (req, res) => {
-    res.send("Hola mundo");
-})

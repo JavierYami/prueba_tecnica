@@ -7,6 +7,7 @@ import { Appointment } from "./models/Appointment.js";
 import { applyAssociations } from "./models/associations.js";
 import { patientsRouter } from './routers/patient.router.js';
 import { doctorRouter } from './routers/doctor.router.js';
+import { appointmentRouter } from './routers/appointment.router.js';
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app.use(json());
 app.use('/patients', patientsRouter);
 
 app.use('/doctors', doctorRouter);
+
+app.use('/appointments', appointmentRouter);
 
 try {
   await sequelize.authenticate();
