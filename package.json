@@ -5,8 +5,9 @@
   "description": "prueba técnica aplicación a trabajo grupo promass",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Javier-Rivera",
   "license": "ISC",
@@ -14,8 +15,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mysql2": "^3.16.0",
-    "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
