@@ -27,7 +27,7 @@ try {
   await sequelize.authenticate();
   console.log("DB conectada");
   applyAssociations();
-  await sequelize.sync({force: true});
+  await sequelize.sync({alter: true});
   console.log("Modelos sincronizados"); 
 } catch (err) {
   console.error("Error conectando a la DB:", err.message);
