@@ -7,6 +7,7 @@ import { Appointment } from "./models/Appointment.js";
 import { applyAssociations } from "./models/associations.js";
 import { patientsRouter } from './routers/patient.router.js';
 import { doctorRouter } from './routers/doctor.router.js';
+import { appointmentRouter } from './routers/appointment.router.js';
 
 dotenv.config();
 
@@ -20,11 +21,13 @@ app.use('/patients', patientsRouter);
 
 app.use('/doctors', doctorRouter);
 
+app.use('/appointments', appointmentRouter);
+
 try {
   await sequelize.authenticate();
   console.log("DB conectada");
   applyAssociations();
-  await sequelize.sync({force: true});
+  await sequelize.sync({alter: true});
   console.log("Modelos sincronizados"); 
 } catch (err) {
   console.error("Error conectando a la DB:", err.message);

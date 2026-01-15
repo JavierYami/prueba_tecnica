@@ -1,16 +1,18 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-const DIALECT = process.env.DB_DIALECT || "sqlite";
+dotenv.config();
+
+const DIALECT = process.env.DB_DIALECT;
 
 export const sequelize = new Sequelize(
-  process.env.DB_NAME || "appointments_db",
-  process.env.DB_USER || "root",
-  process.env.DB_PASSWORD || "",
+  process.env.DB_NAME,
+  process.env.DB_USER ,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT || 3306),
+    host: process.env.DB_HOST, 
+    port: process.env.DB_PORT,
     dialect: DIALECT,
-    storage: DIALECT === "sqlite" ? (process.env.DB_STORAGE || "./dev.sqlite") : undefined,
     logging: false,
   }
 );
